@@ -9,6 +9,21 @@
             <div class="col-md-3 mt-4">
                 <form action="">
 
+                    <div class='block card p-3 mb-2'>
+
+                        <div class='h2'>Поиск:</div>
+
+                        <div class="input-group">
+                        <div class="form-outline">
+                            <input value='{{ $req_search }}' name='search' type="search" id="form1" class="form-control" />
+                            <label class="form-label" for="form1"></label>
+                        </div>
+                        <button type="" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Поиск
+                        </button>
+                        </div>
+
+                    </div>
 
                     <div class='block card p-3 mb-2'>
 
@@ -59,7 +74,7 @@
 
                         <div class="col-sm-4">
                             <div class="card mt-4" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="images/main.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">   {{ $item->name }}</h5>
                                 <p class="card-text">
@@ -79,7 +94,7 @@
                             
                                 </p>
                                 <button type="button" class="btn btn-primary item" data-id='{{ $item->id}}' id='item'>
-                                    {{ $item->name }}
+                                   Забронировать
                                 </button>
                             </div>
                             </div>

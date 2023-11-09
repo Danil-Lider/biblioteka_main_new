@@ -61,6 +61,11 @@ class DatabaseSeeder extends Seeder
             'genre_id' => 1
         ]);
 
+        DB::table('genre_item')->insert([
+            'item_id' => 3,
+            'genre_id' => 2
+        ]);
+
 
 
 

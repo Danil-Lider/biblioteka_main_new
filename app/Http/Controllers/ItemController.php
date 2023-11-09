@@ -16,6 +16,9 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations\getBelongsToRelation;
 
 
+
+use Illuminate\Database\Query\JoinClause;
+
 class ItemController extends Controller
 {
     /**
@@ -30,14 +33,35 @@ class ItemController extends Controller
     {
 
         //  SORT AND FILTER
+        $req_search = null;
 
         $query = Item::limit(10);
-    
-        if ($request->filled('name')) {
-            $title = $request->get('name');
-            $query->where('name', 'like', "%$title%");
-        }
 
+        if ($request->filled('search')) {
+            $req_search = $request->get('search');
+            $query->where('name', 'like', "%$req_search%");
+
+           
+
+            if($query->count() === 0){
+
+                // where('authors.name', 'like', "%$req_search%")->
+
+                // $query = Item::join('authors', 'authors.id', '=', 'items.author_id')->select('items.*');
+
+                // $query->where('name', 'like', "%$req_search%");
+
+                // $query = Item::join($req_search, 'authors', function (JoinClause $join) {
+                //     $join->on('authors.id', '=', 'items.author_id')
+                //         ->where('authors.name', 'like', "%$req_search%");
+                // });
+
+                $query = Item::query()->where('author_id', Author::select('id')->where('authors.name', 'like', "%$req_search%")->get()->toArray()); 
+                
+            }
+
+        }
+        
         if ($request->filled('genre_ids')) {
    
             $genres = Genre::where('id', $request->get('genre_ids'));
@@ -75,7 +99,7 @@ class ItemController extends Controller
 
 
     
-        return view('items', ['items' => $items, 'authors' => $authors, 'genres' => $genres, 'req_genre_ids' => $req_genre_ids, 'req_author_ids' => $req_author_ids]);
+        return view('items', ['items' => $items, 'authors' => $authors, 'genres' => $genres, 'req_genre_ids' => $req_genre_ids, 'req_author_ids' => $req_author_ids, 'req_search' => $req_search]);
     }
 
     /**
