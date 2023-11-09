@@ -4,30 +4,94 @@
    
     @include('my_comp.modal')
 
-
-    <div class='container'>
+    <div class="container">
         <div class='row'>
+            <div class="col-md-3 mt-4">
+                <form action="">
 
-            @foreach ($items as $item)
 
-                <div class="col-sm-3">
-                    <div class="card mt-2" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">   {{ $item->name }}</h5>
-                        <p class="card-text">AUTHOR:    {{ $item->author->name }} <br> GENRE:    {{ $item->genre }} </p>
-                        <button type="button" class="btn btn-primary item" data-id='{{ $item->id}}' id='item'>
-                            {{ $item->name }}
-                        </button>
+                    <div class='block card p-3 mb-2'>
+
+                        <div class='h2'>Жанр:</div>
+
+                        @foreach ($genres as $item)
+
+
+                            <div class="col-sm-4">
+                                <div class="form-check form-switch">
+                                    <input name='genre_ids[]'  {{ in_array($item->id, $req_genre_ids ) ? 'checked' : 0 }}   value='{{ $item->id }}' class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault"> {{ $item->name }} </label>
+                                </div>  
+                            </div>
+
+                        @endforeach
+
                     </div>
+
+                    <div class='block card p-3 mb-2'>
+
+                        <div class='h2'>Авторы:</div>
+
+                        @foreach ($authors as $item)
+
+
+                            <div class="col-sm-4">
+                                <div class="form-check form-switch">
+                                    <input name='author_ids[]'  {{ in_array($item->id, $req_author_ids ) ? 'checked' : 0 }}   value='{{ $item->id }}' class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault"> {{ $item->name }} </label>
+                                </div>  
+                            </div>
+
+                        @endforeach
+
                     </div>
+                   
+
+                    <button class='btn btn-primary'>Фильтрация</button>
+
+                </form>
+            </div>
+            <div class='col-md-9'>
+
+                <div class="row"> 
+
+                    @foreach ($items as $item)
+
+                        <div class="col-sm-4">
+                            <div class="card mt-4" style="width: 18rem;">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">   {{ $item->name }}</h5>
+                                <p class="card-text">
+                                    
+                                    AUTHOR:    {{ $item->author->name }}
+                                
+                                    <br>
+
+                                    GENRE:   
+
+                                    @foreach ($item->genres as $genre) 
+
+                                        {{ $genre->name }},
+
+                                    @endforeach
+                              
+                            
+                                </p>
+                                <button type="button" class="btn btn-primary item" data-id='{{ $item->id}}' id='item'>
+                                    {{ $item->name }}
+                                </button>
+                            </div>
+                            </div>
+                        </div>
+
+                    @endforeach
+                
                 </div>
 
-            @endforeach
-        
+            </div>
         </div>
     </div>
-        
 
     <script>
 

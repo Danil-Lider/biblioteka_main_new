@@ -56,7 +56,7 @@ PostgreSQL
 
 
 
-
+sail artisan make:migration create_genre_item_table
 
 
 

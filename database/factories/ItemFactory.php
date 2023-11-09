@@ -29,7 +29,7 @@ class ItemFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'author_id' => DB::table('authors')->first()->id,
-            'genre' => $this->faker->name()
+            // 'genre' => $this->faker->name()
         ];
     }
 }

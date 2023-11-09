@@ -21,13 +21,12 @@ return new class extends Migration
             if (Schema::hasTable('authors')) {
                 $table->foreignId('author_id')
                 ->references('id')
-                ->on('authors')
+                ->on('authors') 
                 ->cascadeOnDelete();
             }
-
           
 
-            $table->string('genre'); // жанр
+            // $table->string('genre'); // жанрw
             $table->boolean('reserve')->nullable(); // зарезервировано
             $table->boolean('book_is_given')->nullable(); // книга выдана 
 

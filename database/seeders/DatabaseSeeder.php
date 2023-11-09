@@ -26,7 +26,46 @@ class DatabaseSeeder extends Seeder
             'name' => 'Alex'
         ]);
 
+
+
+
+
         Item::factory()->count(5)->create();
+
+
+
+
+        DB::table('genres')->insert([
+            'name' => 'Комедия'
+        ]);
+
+        DB::table('genres')->insert([
+            'name' => 'Ужасы'
+        ]);
+
+
+
+
+        DB::table('genre_item')->insert([
+            'item_id' => 1,
+            'genre_id' => 1
+        ]);
+
+        DB::table('genre_item')->insert([
+            'item_id' => 1,
+            'genre_id' => 2
+        ]);
+
+        DB::table('genre_item')->insert([
+            'item_id' => 2,
+            'genre_id' => 1
+        ]);
+
+
+
+
+
+
         // Item::factory()->count(5)->create();
 
         // \App\Models\User::factory(10)->create();
