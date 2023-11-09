@@ -27,29 +27,13 @@
     </head>
     <body class="font-sans antialiased">
         <div class="">
-
-            @if(Auth::check())
-
-                <!-- Page Heading -->
-                @include('layouts.navigation')
-
-                <!-- Page Heading -->
-                @if (isset($header))
-                    <header class="bg-white shadow">
-                        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                            {{ $header }}
-                        </div>
-                    </header>
-                @endif
-
-            @endif 
-
          
             <nav class="navbar navbar-expand-lg navbar-light bg-light ">
                 <div class="container">
                     <a class="navbar-brand" href="{{ route('items.index') }}">Библиотека</a>
                     @if(Auth::check())
-                        <div class='navbar-brand'>Name: {{ Auth::user()->name }}</div>
+                        <div class='navbar-brand'>Имя пользователя: {{ Auth::user()->name }}</div>
+                        <a class="navbar-brand" href="{{ route('profile.edit') }}">Профиль</a>
                         <form class="navbar-brand" id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button class="nav-link" type="submit">
