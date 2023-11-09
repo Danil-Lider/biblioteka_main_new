@@ -16,6 +16,8 @@ sail artisan make:migration create_genre_item_table
 
 sail artisan migrate:refresh --seed
 
+sail artisan route:list
+
 
 
 

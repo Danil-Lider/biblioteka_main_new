@@ -19,17 +19,28 @@
 
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            
+        <div class="">
 
             <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+         
+            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+                <div class="container">
+                    <a class="navbar-brand" href="{{ route('items.index') }}">Библиотека</a>
+                    @if(Auth::check())
+                        <div class='navbar-brand'>Name: {{ Auth::user()->name }}</div>
+                        <form class="navbar-brand" id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="nav-link" type="submit">
+                                Выйти  
+                            </button>
+                        </form>
+                    @else
+                        <a class="navbar-brand" href="{{ route('register') }}">Регистрация</a>
+                        <a class="navbar-brand" href="{{ route('login') }}">Авторизация</a>
+                    @endif 
+                </div>
+            </nav>
+          
 
             <!-- Page Content -->
             <main>
