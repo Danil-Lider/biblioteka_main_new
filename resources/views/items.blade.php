@@ -10,7 +10,6 @@
 
             @foreach ($items as $item)
 
-
                 <div class="col-sm-3">
                     <div class="card mt-2" style="width: 18rem;">
                     <img src="..." class="card-img-top" alt="...">
