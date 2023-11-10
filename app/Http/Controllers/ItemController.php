@@ -19,6 +19,10 @@ use Illuminate\Database\Eloquent\Relations\getBelongsToRelation;
 
 use Illuminate\Database\Query\JoinClause;
 
+
+
+use Illuminate\Support\Facades\Auth;
+
 class ItemController extends Controller
 {
     /**
@@ -131,6 +135,16 @@ class ItemController extends Controller
      */
     public function check(Item $item)
     {
+
+        if(!Auth::check()){
+
+            $item = ['error' => 'Авторизуйтесь или Зарегиструйтесь'];
+
+            return json_encode($item);
+
+           
+        }
+
         return json_encode($item);
     }
 
