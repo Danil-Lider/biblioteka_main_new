@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,14 @@ use App\Http\Controllers\ItemController;
 2. Выбираем время бронирования
 3. Создается Order на это книгу с привязкой к пользователю
 
+id 1
+User_id 1
+Book_id 1
+Book_is_given 0
+reserve 1
+
+
+
 
 Приветствуются дополнительные функции, например: 
 Отправка пароля клиенту на электронный ящик, либо изменение и восстановление пароля клиентом.
@@ -87,6 +96,8 @@ Route::get('/', function () {
 Route::get('/items/check/{item}', [ItemController::class, 'check']);
 Route::resource('/items', ItemController::class);
 
+// Бронирование
+Route::get('/create',[OrderController::class, 'create']);
 
 
 Route::get('/dashboard', function () {
