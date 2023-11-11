@@ -10,18 +10,13 @@ use App\Models\Genre;
 
 use Illuminate\Http\Request;
 
-// use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-// use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 use Illuminate\Database\Eloquent\Relations\getBelongsToRelation;
-
-
-
 use Illuminate\Database\Query\JoinClause;
-
-
-
 use Illuminate\Support\Facades\Auth;
+
+
+use App\Action\FilterByRequest;
 
 class ItemController extends Controller
 {
@@ -36,90 +31,32 @@ class ItemController extends Controller
     public function index(Request $request)
     {
 
-        //  SORT AND FILTER
-        $req_search = null;
 
         $query = Item::limit(10);
-
-        if ($request->filled('search')) {
-            $req_search = $request->get('search');
-            $query->where('name', 'like', "%$req_search%");
-
-           
-
-            if($query->count() === 0){
-
-                // where('authors.name', 'like', "%$req_search%")->
-
-                // $query = Item::join('authors', 'authors.id', '=', 'items.author_id')->select('items.*');
-
-                // $query->where('name', 'like', "%$req_search%");
-
-                // $query = Item::join($req_search, 'authors', function (JoinClause $join) {
-                //     $join->on('authors.id', '=', 'items.author_id')
-                //         ->where('authors.name', 'like', "%$req_search%");
-                // });
-
-                $query = Item::query()->where('author_id', Author::select('id')->where('authors.name', 'like', "%$req_search%")->get()->toArray()); 
-                
-            }
-
-        }
-        
-        if ($request->filled('genre_ids')) {
-   
-            $genres = Genre::where('id', $request->get('genre_ids'));
-            $query = $genres->first()->items();
-        }
-
-        if ($request->filled('author_ids')) {
-            $query->where('author_id', $request->get('author_ids'));
-        }
-
+        $FilterByRequest = new FilterByRequest;
+        $query = $FilterByRequest->filter($query, $request);
         $items = $query->get();
 
 
-
         // SHOW FILTERS 
+        $req_search = null;
+        $req_search = $request->get('search'); // FOR SEARCH
+        $authors = Author::get(); // FOR AUTHORS
+        $genres = Genre::get(); // FOR GENRES
 
-        $authors = Author::get();
 
-        $genres = Genre::get();
-
-
-
-        // CHECKED FOR UPDATE
-
+        // CHECKED FOR UPDATE IN FILTERS 
         $req_author_ids = $request->get('author_ids') ? $request->get('author_ids') : array();
         $req_genre_ids = $request->get('genre_ids') ? $request->get('genre_ids') : array();
-
-        // TEST
-
-        // $item = Item::find(1);
-
-        // foreach ($item->genres as $role) {
-        //     dd($item->genres);
-        // }
-
-
     
-        return view('items', ['items' => $items, 'authors' => $authors, 'genres' => $genres, 'req_genre_ids' => $req_genre_ids, 'req_author_ids' => $req_author_ids, 'req_search' => $req_search]);
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreItemRequest $request)
-    {
-        //
+        return view('items', [
+            'items' => $items,
+            'authors' => $authors, 'genres' => $genres,
+            'req_genre_ids' => $req_genre_ids,
+            'req_author_ids' => $req_author_ids,
+            'req_search' => $req_search
+        ]);
     }
 
     /**
@@ -148,27 +85,4 @@ class ItemController extends Controller
         return json_encode($item);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Item $item)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateItemRequest $request, Item $item)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Item $item)
-    {
-        //
-    }
 }

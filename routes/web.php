@@ -90,18 +90,21 @@ sail artisan make:migration create_genre_item_table
 */
 
 Route::get('/', function () {
-    return redirect('/items');
+    return redirect('/catalog');
 });
 
-Route::get('/items/check/{item}', [ItemController::class, 'check']);
-Route::resource('/items', ItemController::class);
-
 // Бронирование
-Route::get('/create',[OrderController::class, 'create']);
+Route::post('/catalog/create',[OrderController::class, 'create']);
+Route::get('/catalog/check/{item}', [ItemController::class, 'check']);
+
+
+Route::resource('/catalog', ItemController::class);
+
+
 
 
 Route::get('/dashboard', function () {
-    return redirect('/items');
+    return redirect('/catalog');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

@@ -15,7 +15,7 @@ return new class extends Migration
 
             $table->id();
 
-            $table->unsignedBigInteger('user_id')->nullable(); // кем зарезервирована, выдана  
+            $table->unsignedBigInteger('user_id'); // кем зарезервирована, выдана  
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict'); // связь с бд Пользователи
             
             $table->foreignId('item_id')->references('id')->on('items') ->cascadeOnDelete(); // id книги
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('book_is_given')->nullable(); // книга выдана
             $table->boolean('book_is_returned')->nullable(); // Книгу вернули
 
-            $table->date('reserve_day')->nullable();
+            $table->date('reserve_day');
             $table->date('book_is_given_start')->nullable();
             $table->date('book_is_given_end')->nullable();
             $table->timestamps();

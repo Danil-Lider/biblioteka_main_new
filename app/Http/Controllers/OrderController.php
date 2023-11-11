@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Order as Contact;
+use App\Models\Order;
+use App\Models\Item;
 
 
 class OrderController extends Controller
@@ -13,20 +14,44 @@ class OrderController extends Controller
      */
     public function create(Request $req)
     {
+        $item_id = $req->input('item_id');
+
+        // check is item_id
+        if(!$item_id){
+
+            $result = ['error' => 'Item id not given'];
+            return json_encode($result);
+        }
+
+        // check is available
+        $item = Item::where('id', $item_id)->get()->first();
+        if($item->is_available === 0){
+
+            $result = ['error' => 'Книга не доступна для бронирования (уже забронирована или выдана)'];
+            return json_encode($result);
+        }
 
          // add to base
-        $contact = new Contact();
-        $contact->user_id = 1;
-        $contact->item_id = 1;
-        // $req->input('item_id');
-        $contact->reserve = 1;
-        $contact->book_is_given = 0;
-        $contact->book_is_returned = 0;
-        $contact->reserve_day =  date("Y-m-d");
-        //$req->input('reserve_day');
-        // $contact->book_is_given_start = 1;
-        // $contact->book_is_given_end = 1;
-        $contact->save();
+        $order = new Order();
+        $order->user_id = auth()->user()->id;
+        $order->item_id = $item_id;
+        $order->reserve = 1;
+        $order->book_is_given = 0;
+        $order->book_is_returned = 0;
+        $order->reserve_day = $req->input('reserve_day');
+        $order->save();
+
+        // change is available
+        $item->is_available = 0;
+        $item->save();
+
+
+        $book_name = $item->name;
+        $result = [
+            'success' => 'Книга: ' . $book_name . ', </br>  Успешно забронирована на дату: ' . $order->reserve_day
+        ];
+        
+        return json_encode($result);
 
     }
 }

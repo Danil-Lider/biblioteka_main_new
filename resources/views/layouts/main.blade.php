@@ -30,7 +30,7 @@
          
             <nav class="navbar navbar-expand-lg navbar-light bg-light ">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ route('items.index') }}">Библиотека</a>
+                    <a class="navbar-brand" href="{{ route('catalog.index') }}">Библиотека</a>
                     @if(Auth::check())
                         <div class='navbar-brand'>Имя пользователя: {{ Auth::user()->name }}</div>
                         <a class="navbar-brand" href="{{ route('profile.edit') }}">Профиль</a>

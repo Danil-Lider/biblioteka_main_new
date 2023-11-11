@@ -27,8 +27,9 @@ return new class extends Migration
           
 
             // $table->string('genre'); // жанрw
-            $table->boolean('reserve')->nullable(); // зарезервировано
-            $table->boolean('book_is_given')->nullable(); // книга выдана 
+            $table->boolean('is_available')->nullable(); // зарезервировано
+            // $table->boolean('reserve')->nullable(); // зарезервировано
+            // $table->boolean('book_is_given')->nullable(); // книга выдана 
 
 
 
