@@ -12,6 +12,16 @@ class OrderController extends Controller
      /**
      * Show the form for creating a new resource.
      */
+    public function showMyOrders(){
+        $orders = Order::where('user_id', auth()->user()->id)->get();
+
+        // dd($orders);
+
+        return view('orders', [
+            'orders' => $orders
+        ]);
+    }
+
     public function create(Request $req)
     {
         $item_id = $req->input('item_id');

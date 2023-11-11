@@ -7,7 +7,7 @@
 <div class="container">
     <div class='row'>
         <div class="col-md-3 mt-4">
-            @include('my_comp.form_filter')
+            @include('my_comp.formFilter')
         </div>
         <div class='col-md-9'>
             <div class="row"> 

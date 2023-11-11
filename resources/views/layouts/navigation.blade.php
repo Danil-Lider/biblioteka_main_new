@@ -21,7 +21,7 @@
 
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('items.index')" :active="request()->routeIs('items.index')">
+                    <x-nav-link :href="route('catalog.index')" :active="request()->routeIs('items.index')">
                         Библиотека
                     </x-nav-link>
                 </div>

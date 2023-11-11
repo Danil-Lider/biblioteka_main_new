@@ -26,12 +26,21 @@
 
     </head>
     <body class="font-sans antialiased">
+
+
+
+        @include('my_comp.modalAuth')
+        @include('my_comp.modalRegister')
+
         <div class="">
          
             <nav class="navbar navbar-expand-lg navbar-light bg-light ">
                 <div class="container">
                     <a class="navbar-brand" href="{{ route('catalog.index') }}">Библиотека</a>
+
                     @if(Auth::check())
+
+                        <a class="navbar-brand" href="{{ route('orders') }}">Мои бронирования</a>
                         <div class='navbar-brand'>Имя пользователя: {{ Auth::user()->name }}</div>
                         <a class="navbar-brand" href="{{ route('profile.edit') }}">Профиль</a>
                         <form class="navbar-brand" id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -41,11 +50,12 @@
                             </button>
                         </form>
                     @else
-                        <a class="navbar-brand" href="{{ route('register') }}">Регистрация</a>
-                        <a class="navbar-brand" href="{{ route('login') }}">Авторизация</a>
+                        <a class="navbar-brand modal-open-register" href="{{ route('register') }}">Регистрация</a>
+                        <a class="navbar-brand modal-open-auth" href="{{ route('login') }}">Авторизация</a>
                     @endif 
                 </div>
             </nav>
+            
           
 
             <!-- Page Content -->
@@ -55,5 +65,20 @@
              
             </main>
         </div>
+    
+    <script>
+
+        $('.modal-open-auth').on('click', function(e){
+            e.preventDefault()
+            modalAuth.show()
+        })
+
+        $('.modal-open-register').on('click', function(e){
+            e.preventDefault()
+            modalRegister.show()
+        })
+
+    </script>
+
     </body>
 </html>

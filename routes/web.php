@@ -93,12 +93,14 @@ Route::get('/', function () {
     return redirect('/catalog');
 });
 
-// Бронирование
+// create order
 Route::post('/catalog/create',[OrderController::class, 'create']);
+// check order is aviable
 Route::get('/catalog/check/{item}', [ItemController::class, 'check']);
-
-
+// catalog
 Route::resource('/catalog', ItemController::class);
+// My Orders 
+Route::get('/orders', [OrderController::class, 'showMyOrders'])->name('orders');
 
 
 
