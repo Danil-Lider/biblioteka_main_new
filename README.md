@@ -1,5 +1,26 @@
 
 
+ \App\Models\User::factory()->create([
+    'name' => 'Admin',
+    'email' => 'admin@mail.ru',
+    'password' => bcrypt('123'),
+    'role_id' => 1,
+]);
+
+\App\Models\User::factory()->create([
+    'name' => 'bibliotekar',
+    'email' => 'bibliotekar@example.com',
+    'password' => bcrypt('123'),
+    'role_id' => 3,
+]);
+
+
+\App\Models\User::factory()->create([
+    'name' => 'user',
+    'email' => 'test@mail.ru',
+    // 'role_id' => 1,
+    'password' => Hash::make('test'),
+]);
 
 
 
