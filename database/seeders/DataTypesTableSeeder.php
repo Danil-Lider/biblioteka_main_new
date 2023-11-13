@@ -107,6 +107,22 @@ class DataTypesTableSeeder extends Seeder
 
 
 
+        $dataType = $this->dataType('slug', 'genres');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'genres',
+                'display_name_singular' => __('Жанр'),
+                'display_name_plural'   => __('Жанры'),
+                'icon'                  => '',
+                'model_name'            => 'App\\Models\\Genre',
+                'controller'            => '',
+                'generate_permissions'  => 1,
+                'description'           => '',
+            ])->save();
+        }
+
+
+
 
 
 

@@ -40,5 +40,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::generateFor('authors');
 
         Permission::generateFor('orders');
+
+        Permission::generateFor('genres');
     }
 }

@@ -27,6 +27,9 @@ class DatabaseSeeder extends Seeder
         $this->call(VoyagerDatabaseSeeder::class);
         $this->call(AdminItemsTableSeeder::class);
         $this->call(AdminOrderItemsTableSeeder::class);
+        $this->call(AdminGenresAuthorsTableSeeder::class);
+
+
 
         \App\Models\User::factory()->create([
             'name' => 'Admin',
@@ -43,14 +46,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-
-
-
-
-
-
-
-
+        \App\Models\User::factory()->create([
+            'name' => 'user',
+            'email' => 'test@mail.ru',
+            // 'role_id' => 1,
+            'password' => Hash::make('test'),
+        ]);
 
 
         DB::table('authors')->insert([
@@ -62,12 +63,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-
-
-
         Item::factory()->count(5)->create();
-
-
 
 
         DB::table('genres')->insert([
@@ -77,8 +73,6 @@ class DatabaseSeeder extends Seeder
         DB::table('genres')->insert([
             'name' => 'Ужасы'
         ]);
-
-
 
 
         DB::table('genre_item')->insert([
@@ -101,26 +95,6 @@ class DatabaseSeeder extends Seeder
             'genre_id' => 2
         ]);
 
-
-
-        // DB::table('moonshine_users')->insert([
-        //     'moonshine_user_role_id' => 1,
-        //     'email' => 'marfol@inbox.ru',
-        //     'password' =>  Hash::make('test'),
-        //     'name' => 'danil'
-        // ]);
-
-
-        // Item::factory()->count(5)->create();
-
-        // \App\Models\User::factory(10)->create();
-
-        \App\Models\User::factory()->create([
-            'name' => 'user',
-            'email' => 'test@mail.ru',
-            // 'role_id' => 1,
-            'password' => Hash::make('test'),
-        ]);
 
     }
 }

@@ -28,7 +28,8 @@ class PermissionRoleTableSeeder extends Seeder
 
 
 
-        // $role = Role::where('name', 'admin')->firstOrFail();
+        // $role = Role::where('name', 'admin')->firstOrFail();       //Permissions
+        // Permission::generateFor('categories');
 
         // $permissions = Permission::all();
 
@@ -41,10 +42,14 @@ class PermissionRoleTableSeeder extends Seeder
         $biblitekar_role = Role::where('name', 'bibliotekar')->firstOrFail();
         $permissions_for_biblitekar = Permission::where('table_name', 'items')->get();
         $permissions_for_biblitekar_authors = Permission::where('table_name', 'authors')->get()->pluck('id')->all();
+        $permissions_for_biblitekar_orders = Permission::where('table_name', 'orders')->get()->pluck('id')->all();
+        $permissions_for_biblitekar_genres = Permission::where('table_name', 'genres')->get()->pluck('id')->all();
 
         $admin_permissions = array(1);
         $permissions_for_biblitekar_all = array_merge($admin_permissions, $permissions_for_biblitekar->pluck('id')->all());
         $permissions_for_biblitekar_all = array_merge($permissions_for_biblitekar_all, $permissions_for_biblitekar_authors);
+        $permissions_for_biblitekar_all = array_merge($permissions_for_biblitekar_all, $permissions_for_biblitekar_orders);
+        $permissions_for_biblitekar_all = array_merge($permissions_for_biblitekar_all, $permissions_for_biblitekar_genres);
         // dd($permissions_for_biblitekar_all);
 
         $biblitekar_role->permissions()->sync(

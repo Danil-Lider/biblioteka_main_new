@@ -233,6 +233,24 @@ class MenuItemsTableSeeder extends Seeder
             ])->save();
         }
 
+
+
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => __('Жанры'),
+            'url'     => '',
+            'route'   => 'voyager.genres.index',
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => 'voyager-data',
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => 15,
+            ])->save();
+        }
+
         // CUSTOM MENU END
 
 
