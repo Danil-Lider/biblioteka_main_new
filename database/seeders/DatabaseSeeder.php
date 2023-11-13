@@ -68,7 +68,12 @@ class DatabaseSeeder extends Seeder
 
 
 
-
+        // DB::table('moonshine_users')->insert([
+        //     'moonshine_user_role_id' => 1,
+        //     'email' => 'marfol@inbox.ru',
+        //     'password' =>  Hash::make('test'),
+        //     'name' => 'danil'
+        // ]);
 
 
         // Item::factory()->count(5)->create();
@@ -80,5 +85,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@mail.ru',
             'password' => Hash::make('test'),
         ]);
+
     }
 }
