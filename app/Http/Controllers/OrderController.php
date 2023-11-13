@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Item;
 
+use DB;
+
 
 class OrderController extends Controller
 {
@@ -20,6 +22,25 @@ class OrderController extends Controller
         return view('orders', [
             'orders' => $orders
         ]);
+    }
+
+    public function updateItems() {
+        $orders = Order::where('reserve', 0)->where('book_is_given', 0)->where('book_is_returned', 1)->get();
+        
+        foreach ($orders as $key => $value) {
+
+            $item_id = $value->item_id;
+
+            Item::where('id', $item_id)->update(['is_available' => 1]);
+
+            // $update[] = array('id' => $value->item_id, 'is_available' => 1);
+          
+            // $items_ids[] = $value->item_id;
+        }
+       
+
+        // DB::table('items')->upsert( $update, ['id'], ['is_available']);
+
     }
 
     public function create(Request $req)

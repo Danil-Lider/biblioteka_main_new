@@ -89,6 +89,9 @@ sail artisan make:migration create_genre_item_table
 |
 */
 
+// Если книга не забронирована и не выдана, а так же прянта, то изменяем статус на доступный
+Route::get('/updateItems', [OrderController::class, 'updateItems'])->name('updateItems');
+
 Route::get('/clear', function() {    
     Artisan::call('cache:clear');    
     Artisan::call('config:cache');    

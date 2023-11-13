@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
            
-            $table->string('name');
+            $table->string('name')->nullable();
             // $table->string('author');
 
 
@@ -22,7 +22,7 @@ return new class extends Migration
                 $table->foreignId('author_id')
                 ->references('id')
                 ->on('authors') 
-                ->cascadeOnDelete();
+                ->cascadeOnDelete()->nullable();
             }
           
 

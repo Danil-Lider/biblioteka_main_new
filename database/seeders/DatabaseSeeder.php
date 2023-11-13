@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(BookSeeder::class);
         $this->call(VoyagerDatabaseSeeder::class);
-        // $this->call(VoyagerDummyDatabaseSeeder::class);
+        $this->call(AdminItemsTableSeeder::class);
+        $this->call(AdminOrderItemsTableSeeder::class);
 
         \App\Models\User::factory()->create([
             'name' => 'Admin',
