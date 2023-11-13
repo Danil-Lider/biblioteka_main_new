@@ -1,4 +1,5 @@
 <?php
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 // use Illuminate\Database\Seeder;
 
 use App\Models\Item;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +21,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+
+        // $this->call(BookSeeder::class);
+        $this->call(VoyagerDatabaseSeeder::class);
+        // $this->call(VoyagerDummyDatabaseSeeder::class);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@mail.ru',
+            'password' => bcrypt('123'),
+            'role_id' => 1,
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'bibliotekar',
+            'email' => 'bibliotekar@example.com',
+            'password' => bcrypt('123'),
+            'role_id' => 3,
+        ]);
+
+
+
+
+
+
+
+
+
+
+
 
         DB::table('authors')->insert([
             'name' => 'Danil'
@@ -83,6 +117,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'user',
             'email' => 'test@mail.ru',
+            // 'role_id' => 1,
             'password' => Hash::make('test'),
         ]);
 

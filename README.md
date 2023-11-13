@@ -21,6 +21,7 @@ sail artisan route:list
 
 
 
+artisan Route:clear
 
 
 
@@ -28,8 +29,7 @@ sail artisan route:list
 
 
 
-
-
+composer remove moonshine/moonshine
 
 
 

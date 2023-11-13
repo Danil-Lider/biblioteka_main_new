@@ -33,16 +33,16 @@ return new class extends Migration
 
 
 
-            $table->unsignedBigInteger('user_id')->nullable(); // кем зарезервирована, выдана  
+            // $table->unsignedBigInteger('user_id')->nullable(); // кем зарезервирована, выдана  
 
 
           
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict'); // связь с бд Пользователи
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict'); // связь с бд Пользователи
 
 
-            $table->date('reserve_start')->nullable();
-            $table->date('reserve_end')->nullable();
+            // $table->date('reserva')->nullable();
+            // $table->date('reserve_end')->nullable();
 
 
 

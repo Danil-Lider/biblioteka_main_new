@@ -89,6 +89,14 @@ sail artisan make:migration create_genre_item_table
 |
 */
 
+Route::get('/clear', function() {    
+    Artisan::call('cache:clear');    
+    Artisan::call('config:cache');    
+    Artisan::call('view:clear');  
+    Artisan::call('route:clear');  
+    // Artisan::call('backup:clean');    
+    return "Кэш очищен.";});
+
 Route::get('/', function () {
     return redirect('/catalog');
 });

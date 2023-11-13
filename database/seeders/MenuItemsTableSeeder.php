@@ -17,6 +17,7 @@ class MenuItemsTableSeeder extends Seeder
     {
         $menu = Menu::where('name', 'admin')->firstOrFail();
 
+
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => __('voyager::seeders.menu_items.dashboard'),
@@ -175,5 +176,66 @@ class MenuItemsTableSeeder extends Seeder
                 'order'      => 14,
             ])->save();
         }
+
+
+
+        // CUSTOM MENU
+
+
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => __('Книги'),
+            'url'     => '',
+            'route'   => 'voyager.items.index',
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => 'voyager-data',
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => 15,
+            ])->save();
+        }
+
+
+
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => __('Авторы'),
+            'url'     => '',
+            'route'   => 'voyager.authors.index',
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => 'voyager-data',
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => 15,
+            ])->save();
+        }
+
+
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => __('Бронирования'),
+            'url'     => '',
+            'route'   => 'voyager.orders.index',
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => 'voyager-data',
+                'color'      => null,
+                'parent_id'  => null,
+                'order'      => 15,
+            ])->save();
+        }
+
+        // CUSTOM MENU END
+
+
+
     }
 }
