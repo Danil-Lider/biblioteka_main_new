@@ -1,15 +1,13 @@
 <template lang="">
     <div class='col-md-9'>
         <div class="row"> 
-
-              
-            <template>
-                    <modal-reserve ref="ModalReserve"></modal-reserve>
-                </template>
-                
-
+           
+          
+            <modal-reserve ref="ModalReserve"></modal-reserve>        
+               
+            
+        
             <div v-for="item in items" class="col-sm-4">
-
              
 
                 <div class="card mt-4" style="width: 18rem;">
@@ -64,9 +62,9 @@ export default {
             console.log(items)
         },
         getModalReserve: function(item){
+            this.$refs.ModalReserve.showModal(item);
             // console.log(this.items) 
-            console.log(  this.$refs.ModalReserve)
-            this.$refs.ModalReserve.showModal();
+            // console.log(  this.$refs.ModalReserve)
             // console.log('вызов метода из ITEMS ')
         }
     }

@@ -85,7 +85,17 @@ Route::get('/clear', function() {
     
 // });
 
+// INDEX JSON 
+Route::get('/api/indexJson', [ItemController::class, 'indexJson']);
+
 Route::resource('/', ItemController::class);
+
+Route::resource('/{any?}', ItemController::class);
+
+// Route::get('/{any?}', function () {
+//     ItemController::class;
+// })->where('any', '.*');
+
 
 // create order
 Route::post('/catalog/create',[OrderController::class, 'create']);
@@ -100,8 +110,7 @@ Route::get('/orders', [OrderController::class, 'showMyOrders'])->name('orders');
 
 // JSON API 
 
-// INDEX JSON 
-Route::get('/api/indexJson', [ItemController::class, 'indexJson']);
+
 
 
 

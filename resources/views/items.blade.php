@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- МОДАЛЬНЫЕ ОКНА И СКРИПТЫ К НИМ --}}
-@include('my_comp.modal')
+{{-- @include('my_comp.modal') --}}
 
 <div class="container">
     <div class='row'>
