@@ -59,6 +59,68 @@ class ItemController extends Controller
         ]);
     }
 
+
+    public function indexJson(Request $request)
+    {
+
+
+        $query = Item::limit(10);
+        $FilterByRequest = new FilterByRequest;
+        $query = $FilterByRequest->filter($query, $request);
+        $items = $query->get();
+
+
+        // SHOW FILTERS 
+        $req_search = null;
+        $req_search = $request->get('search'); // FOR SEARCH
+        $authors = Author::get(); // FOR AUTHORS
+        $genres = Genre::get(); // FOR GENRES
+
+
+        // CHECKED FOR UPDATE IN FILTERS 
+        $req_author_ids = $request->get('author_ids') ? $request->get('author_ids') : array();
+        $req_genre_ids = $request->get('genre_ids') ? $request->get('genre_ids') : array();
+
+
+
+        $items_array = $items->toArray();
+
+        foreach ($items as $item_key => $item) {
+
+            $items_array[$item_key]['author_name'] =  $item->author->name;
+
+            foreach ($item->genres as $key => $genre) {
+
+                $items_array[$item_key]['genres'][] = $genre->name; 
+               
+            }
+
+        }
+
+        // dd($items_array );
+
+        $items = $items_array;
+
+
+        $res =  [
+            'items' => $items,
+            'authors' => $authors, 'genres' => $genres,
+            'req_genre_ids' => $req_genre_ids,
+            'req_author_ids' => $req_author_ids,
+            'req_search' => $req_search
+        ];
+    
+        return json_encode($res);
+
+        // return view('items', [
+        //     'items' => $items,
+        //     'authors' => $authors, 'genres' => $genres,
+        //     'req_genre_ids' => $req_genre_ids,
+        //     'req_author_ids' => $req_author_ids,
+        //     'req_search' => $req_search
+        // ]);
+    }
+
     /**
      * Display the specified resource.
      */

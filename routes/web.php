@@ -80,9 +80,12 @@ Route::get('/clear', function() {
     // Artisan::call('backup:clean');    
     return "Кэш очищен.";});
 
-Route::get('/', function () {
-    return redirect('/catalog');
-});
+// Route::get('/', function () {
+//     // return redirect('/catalog');
+    
+// });
+
+Route::resource('/', ItemController::class);
 
 // create order
 Route::post('/catalog/create',[OrderController::class, 'create']);
@@ -92,6 +95,15 @@ Route::get('/catalog/check/{item}', [ItemController::class, 'check']);
 Route::resource('/catalog', ItemController::class);
 // My Orders 
 Route::get('/orders', [OrderController::class, 'showMyOrders'])->name('orders');
+
+
+
+// JSON API 
+
+// INDEX JSON 
+Route::get('/api/indexJson', [ItemController::class, 'indexJson']);
+
+
 
 
 

@@ -44,6 +44,16 @@
                 </div>
             </nav>
             
+            <div id="app">
+                
+                <index-component></index-component>
+
+                
+                <div><router-link to='/'>Home</router-link></div>
+                <div><router-link to="/items">Items</router-link></div>
+                
+
+            </div>
           
             <!-- Page Content -->
             <main>
