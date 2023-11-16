@@ -47,6 +47,13 @@ class OrderController extends Controller
     {
         $item_id = $req->input('item_id');
 
+         // check is user
+         if(!auth()->user()){
+
+            $result = ['error' => 'Авторизуйтесь или Зарегиструйтесь'];
+            return json_encode($result);
+        }
+
         // check is item_id
         if(!$item_id){
 
@@ -79,10 +86,12 @@ class OrderController extends Controller
 
         $book_name = $item->name;
         $result = [
-            'success' => 'Книга: ' . $book_name . ', </br>  Успешно забронирована на дату: ' . $order->reserve_day
+            'success' => 'Книга: ' . $book_name . ', Успешно забронирована на дату: ' . $order->reserve_day
         ];
+
         
-        return json_encode($result);
+        
+        return  response()->json($result);
 
     }
 }

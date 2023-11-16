@@ -90,7 +90,7 @@ Route::get('/api/indexJson', [ItemController::class, 'indexJson']);
 
 Route::resource('/', ItemController::class);
 
-Route::resource('/{any?}', ItemController::class);
+
 
 // Route::get('/{any?}', function () {
 //     ItemController::class;
@@ -135,3 +135,6 @@ require __DIR__.'/auth.php';
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+
+Route::resource('/{any?}', ItemController::class);
