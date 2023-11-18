@@ -82,6 +82,8 @@ class ItemController extends Controller
         $req_genre_ids = $request->get('genre_ids') ? $request->get('genre_ids') : array();
 
 
+        // dd($req_genre_ids);
+
 
         $items_array = $items->toArray();
 
@@ -101,24 +103,20 @@ class ItemController extends Controller
 
         $items = $items_array;
 
-
-        $res =  [
-            'items' => $items,
+        $filter_array = [
             'authors' => $authors, 'genres' => $genres,
             'req_genre_ids' => $req_genre_ids,
             'req_author_ids' => $req_author_ids,
             'req_search' => $req_search
         ];
+
+        $res =  [
+            'items' => $items,
+            'filter_array' => $filter_array
+        ];
     
         return json_encode($res);
 
-        // return view('items', [
-        //     'items' => $items,
-        //     'authors' => $authors, 'genres' => $genres,
-        //     'req_genre_ids' => $req_genre_ids,
-        //     'req_author_ids' => $req_author_ids,
-        //     'req_search' => $req_search
-        // ]);
     }
 
     /**

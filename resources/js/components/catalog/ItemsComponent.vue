@@ -38,22 +38,30 @@
 import ModalReserve from '../modals/ModalReserve.vue'
 
 export default {
+    props: {
+        items:{
+            type: Array,
+            default: function(){
+                return []
+            }
+        }
+    },
     name: 'ItemComponent',
     components: {
         ModalReserve,
     },
     data() {
         return {    
-            items: [],
+            // items: [],
             is_refresh: false
         }
     },
     mounted(){
 
-        axios.get('/api/indexJson').then((response) => {
-            console.log(response.data)
-            this.items = response.data.items;
-        })
+        // axios.get('/api/indexJson').then((response) => {
+        //     console.log(response.data)
+        //     this.items = response.data.items;
+        // })
         // this.update();
 
     },
