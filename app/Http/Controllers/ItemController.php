@@ -64,11 +64,24 @@ class ItemController extends Controller
     {
 
 
-        $query = Item::limit(10);
-        $FilterByRequest = new FilterByRequest;
-        $query = $FilterByRequest->filter($query, $request);
-        $items = $query->get();
+ 
 
+        if($request->get('search') || $request->get('genre_ids') ||  $request->get('author_ids')){
+            $query = Item::limit(10);
+            $FilterByRequest = new FilterByRequest;
+            $query = $FilterByRequest->filter($query,$request);
+            $items = $query->paginate(10);
+
+        }else{
+
+            $query = Item::paginate(10);
+            $items = $query;
+
+        }
+
+
+        // dd($items)
+        // dd($query);
 
         // SHOW FILTERS 
         $req_search = null;
@@ -82,10 +95,10 @@ class ItemController extends Controller
         $req_genre_ids = $request->get('genre_ids') ? $request->get('genre_ids') : array();
 
 
-        // dd($req_genre_ids);
+        // dd($items->items());
 
-
-        $items_array = $items->toArray();
+        $main_items = $items->items();
+        $items_array = $main_items;
 
         foreach ($items as $item_key => $item) {
 
@@ -93,7 +106,7 @@ class ItemController extends Controller
 
             foreach ($item->genres as $key => $genre) {
 
-                $items_array[$item_key]['genres'][] = $genre->name; 
+                $items_array[$item_key]['genres'] = $genre->name; 
                
             }
 
@@ -101,7 +114,7 @@ class ItemController extends Controller
 
         // dd($items_array );
 
-        $items = $items_array;
+        // $items = $items_array;
 
         $filter_array = [
             'authors' => $authors, 'genres' => $genres,

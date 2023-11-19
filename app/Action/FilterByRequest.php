@@ -12,13 +12,14 @@ class FilterByRequest extends Request
 {
     public function filter($query ,Request $request) {
 
-        // $query = Item::limit(10);
+        // $query = Item::all();
+      
         
         if ($request->filled('search')) {
 
 
             $req_search = $request->get('search');
-            $query->where('name', 'like', "%$req_search%");
+            $query = $query->where('name', 'like', "%$req_search%");
 
 
             if($query->count() === 0){
@@ -35,7 +36,10 @@ class FilterByRequest extends Request
         }
 
         if ($request->filled('author_ids')) {
-            $query->where('author_id', $request->get('author_ids'));
+
+            // dd($request->get('author_ids'));
+
+            $query = $query->where('author_id', $request->get('author_ids'));
         }
 
         return $query;

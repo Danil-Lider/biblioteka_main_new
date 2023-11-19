@@ -19,9 +19,12 @@
                         АВТОР:    {{ item.author_name }} <br>
 
                         ЖАНРЫ: 
-                        <div v-for="genre in item.genres">
-                            {{ genre }},
-                        </div>  
+                        <b v-for="genre in item.genres">
+                            {{ genre.name }}
+                            <template v-if="item.genres.length > 1 && item.genres[item.genres.length - 1] != genre">
+                                ,
+                            </template>
+                        </b>  
                     </p>
 
                     <button  v-on:click="getModalReserve(item)" type="button" class="btn btn-primary item"   v-bind:data-id="item.id" >

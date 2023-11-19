@@ -2,7 +2,7 @@ import './bootstrap';
 
 // import { createApp } from 'vue';
 import { createApp } from 'vue/dist/vue.esm-bundler';   
-import * as VueRouter from 'vue-router'
+import * as VueRouter from 'vue-router';
 
 import IndexComponent from './components/IndexComponent.vue'
 import CatalogIndex from './components/catalog/Index.vue'

@@ -7,6 +7,11 @@
             </div>
             
             <items-component v-bind:items='items'></items-component>
+
+        
+
+            <pagination-component @filter='onFilter' v-bind:pagination='pagination'></pagination-component>
+
         </div>
     </div>
 
@@ -14,6 +19,8 @@
 <script >
 import FiltersComponent from './FiltersComponent.vue';
 import ItemsComponent from './ItemsComponent.vue';
+import PaginationComponent from './PaginationComponent.vue';
+
 
 
 
@@ -22,18 +29,23 @@ export default {
         return {
             items: [],
             filter_array:[],
+            pagination: [],
         }
     },
     mounted(){
         axios.get('/api/indexJson').then((response) => {
-            this.items = response.data.items;
+            this.pagination = response.data.items;
+            this.items = response.data.items.data;
             this.filter_array = response.data.filter_array
+            console.log(response)
         })
     },
     methods: {
         onFilter (response) {
 
-            this.items = response.data.items;
+            console.log(response)
+            this.pagination = response.data.items;
+            this.items = response.data.items.data;
             this.filter_array = response.data.filter_array
 
             // console.log('child component said login', data)
@@ -41,7 +53,7 @@ export default {
     },
     name: 'Index',
     components: {
-        FiltersComponent, ItemsComponent
+        FiltersComponent, ItemsComponent, PaginationComponent,
     },
 }
 </script>
