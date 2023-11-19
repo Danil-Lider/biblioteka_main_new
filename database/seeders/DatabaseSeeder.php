@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Item::factory()->count(3000)->create();
+        Item::factory()->count(300)->create();
 
 
         DB::table('genres')->insert([

@@ -1,4 +1,6 @@
 <template lang="">
+
+
     
     <div class="container">
         <div class='row'>
@@ -20,6 +22,7 @@
 import FiltersComponent from './FiltersComponent.vue';
 import ItemsComponent from './ItemsComponent.vue';
 import PaginationComponent from './PaginationComponent.vue';
+// import Registration from '../auth/Registration.vue';
 
 
 
@@ -53,7 +56,7 @@ export default {
     },
     name: 'Index',
     components: {
-        FiltersComponent, ItemsComponent, PaginationComponent,
+        FiltersComponent, ItemsComponent, PaginationComponent
     },
 }
 </script>

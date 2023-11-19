@@ -23,6 +23,24 @@
             window.myToken =  <?php echo json_encode([
                 'csrfToken' => csrf_token(),
             ]); ?>
+
+
+            $('.modal-open-auth').on('click', function(e){
+                e.preventDefault()
+                modalAuth.show()
+            })
+
+            $('.modal-open-register').on('click', function(e){
+                e.preventDefault()
+                modalRegister.show()
+            })
+
+        
+
+            $( "form [type=password]" ).attr("placeholder", "Минимум 8 символов !")
+
+ 
+
         </script>
 
 
@@ -30,16 +48,26 @@
     <body class="font-sans antialiased">
         @include('my_comp.modalAuth')
         @include('my_comp.modalRegister')
+
         <div>
+
+       
+
+            <div id="app">
+
             <nav class="navbar navbar-expand-lg navbar-light bg-light ">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ route('catalog.index') }}">Библиотека</a>
+
+                    <router-link  class="navbar-brand" to='/'>Домой</router-link>
+                    <router-link class="navbar-brand"  to="/items">Каталог</router-link>  
+                   
+
 
                     @if(Auth::check())
 
-                        <a class="navbar-brand" href="{{ route('orders') }}">Мои бронирования</a>
+                        <router-link class="navbar-brand" to="/orders">Мои бронирования</router-link>
                         <div class='navbar-brand'>Имя пользователя: {{ Auth::user()->name }}</div>
-                        <a class="navbar-brand" href="{{ route('profile.edit') }}">Профиль</a>
+                      
                         <form class="navbar-brand" id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button class="nav-link" type="submit">
@@ -47,62 +75,37 @@
                             </button>
                         </form>
                     @else
-                        <a class="navbar-brand modal-open-register" href="{{ route('register') }}">Регистрация</a>
-                        <a class="navbar-brand modal-open-auth" href="{{ route('login') }}">Авторизация</a>
+                        <router-link class="navbar-brand"  to="/register">Регистрация</router-link>  
+                        <router-link class="navbar-brand"  to="/auth">Авторизация</router-link>  
                     @endif 
                 </div>
             </nav>
             
-            <div id="app">
-                
-                <index-component></index-component>
-
-                
-                <div><router-link to='/'>Home</router-link></div>
-                <div><router-link to="/items">Items</router-link></div>
-                
-
-            </div>
-          
-            <!-- Page Content -->
+           
+        
             <main>
 
+           
+
+
+                    <index-component></index-component>
+
+          
+
+              @if('/profile' ==  $_SERVER['REQUEST_URI'])
+
                 
+
+              @endif
                 
             </main>
+
+
+
         </div>
+    </div>
     
-    <script>
-
-        $('.modal-open-auth').on('click', function(e){
-            e.preventDefault()
-            modalAuth.show()
-        })
-
-        $('.modal-open-register').on('click', function(e){
-            e.preventDefault()
-            modalRegister.show()
-        })
-
-        // $('.modalAuth')
-
-        console.log( $( "form [type=password]" ).attr("placeholder", "Минимум 8 символов !"))
-
-        // $( ".modalAuth form" ).on( "submit", function( event ) {
-
-        //     // if ( $( "input" ).first().val() === "correct" ) {
-        //     //     $( "span" ).text( "Validated..." ).show();
-        //     // return;
-        //     // }
-
-        //     return false;
-
-            
-        //     $( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
-        //     event.preventDefault();
-        // } );
-
-    </script>
+  
 
 <style>
 .modal-mask {

@@ -24,6 +24,18 @@ class OrderController extends Controller
         ]);
     }
 
+    public function showMyOrdersJson(){
+        
+        $orders = Order::where('user_id', auth()->user()->id)->get();
+
+        foreach($orders as $key => $order){
+            $orders[$key]['name'] = $order->item->name;
+            unset( $orders[$key]['item']);
+        }
+
+        return json_encode($orders);
+    }
+
     public function updateItems() {
         $orders = Order::where('reserve', 0)->where('book_is_given', 0)->where('book_is_returned', 1)->get();
         

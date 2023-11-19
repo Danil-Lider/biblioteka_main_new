@@ -69,6 +69,22 @@ sail artisan make:migration create_genre_item_table
 |
 */
 
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+
+
+
+
 // Если книга не забронирована и не выдана, а так же прянта, то изменяем статус на доступный
 Route::get('/updateItems', [OrderController::class, 'updateItems'])->name('updateItems');
 
@@ -80,11 +96,13 @@ Route::get('/clear', function() {
     // Artisan::call('backup:clean');    
     return "Кэш очищен.";});
 
-// Route::get('/', function () {
-//     // return redirect('/catalog');
-    
-// });
 
+
+
+
+
+// My Orders JSON
+Route::get('/api/OrdersJson', [OrderController::class, 'showMyOrdersJson'])->name('OrdersJson');    
 // INDEX JSON 
 Route::get('/api/indexJson', [ItemController::class, 'indexJson']);
 
@@ -121,20 +139,13 @@ Route::get('/dashboard', function () {
     return redirect('/catalog');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
 
 
 
 require __DIR__.'/auth.php';
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
 
 
 Route::resource('/{any?}', ItemController::class);
