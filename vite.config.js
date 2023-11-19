@@ -1,14 +1,11 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
-  plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => ['test-component'].includes(tag),
-        }
-      }
-    })
-  ]
-})
+    plugins: [
+        laravel([
+            'resources/css/app.css',
+            'resources/js/app.js', // Update the entry module here
+        ]),
+    ],
+});

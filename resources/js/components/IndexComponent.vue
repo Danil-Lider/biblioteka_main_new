@@ -1,6 +1,5 @@
 <template lang="">
     <div>
-        <!-- <registration></registration> -->
         <router-view></router-view>
     </div>
 </template>
