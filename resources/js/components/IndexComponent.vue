@@ -1,17 +1,22 @@
-<template lang="">
+<template>
     <div>
         <router-view></router-view>
     </div>
 </template>
 <script>
 
-// import registration from './auth/egistration.vue';
+
 
 export default {
     name: "IndexComponent",
     components: {
         
     },
+    data(){
+        return {
+            
+        }
+    }
 }
 </script>
 <style lang="">
